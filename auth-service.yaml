@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:postgres-auth}:5432/rapidocourier_auth
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+
+server:
+  port: 8081
+
+jwt:
+  secret: ${JWT_SECRET:default-secret-key-minimum-32-chars}
+  expiration: 86400000
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    initial-instance-info-replication-interval-seconds: 5
+    instance-info-replication-interval-seconds: 10
