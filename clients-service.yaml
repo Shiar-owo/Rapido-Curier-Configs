@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: clients-service
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:postgres-clientes}:5432/rapidocourier_clientes
+    username: ${DB_USERNAME:clientes_user}
+    password: ${DB_PASSWORD:clientes_pass}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  port: 8082
+
+reniec:
+  api:
+    url: https://api.decolecta.com/v1/reniec/dni
+    token: ${RENIEC_TOKEN:}
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      reniec:
+        sliding-window-size: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 3
+        slow-call-duration-threshold: 2s
+        slow-call-rate-threshold: 50
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    initial-instance-info-replication-interval-seconds: 5
+    instance-info-replication-interval-seconds: 10
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,circuitbreakers
+  endpoint:
+    health:
+      show-details: always
+  circuitbreakers:
+    enabled: true
