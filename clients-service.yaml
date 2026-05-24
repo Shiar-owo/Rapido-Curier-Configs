@@ -29,7 +29,10 @@ reniec:
 resilience4j:
   circuitbreaker:
     instances:
-      reniec:
+jwt:
+  secret: ${JWT_SECRET:default-secret-key-minimum-32-chars}
+
+reniec:
         sliding-window-size: 5
         failure-rate-threshold: 50
         wait-duration-in-open-state: 10s
