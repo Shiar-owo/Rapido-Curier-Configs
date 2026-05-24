@@ -3,8 +3,8 @@ spring:
     name: clients-service
   datasource:
     url: jdbc:postgresql://${DB_HOST:postgres-clientes}:5432/rapidocourier_clientes
-    username: ${spring.datasource.username:clientes_user}
-    password: ${spring.datasource.password:clientes_pass}
+    username: ${DB_USERNAME:clientes_user}
+    password: ${DB_PASSWORD:clientes_pass}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 10
@@ -24,7 +24,7 @@ server:
 reniec:
   api:
     url: https://api.decolecta.com/v1/reniec/dni
-    token: ${reniec.api.token:}
+    token: ${RENIEC_TOKEN:}
 
 resilience4j:
   circuitbreaker:
@@ -38,7 +38,7 @@ resilience4j:
         slow-call-rate-threshold: 50
 
 jwt:
-  secret: ${jwt.secret:default-secret-key-minimum-32-chars}
+  secret: ${JWT_SECRET:default-secret-key-minimum-32-chars}
 
 eureka:
   client:
