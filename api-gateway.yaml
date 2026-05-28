@@ -3,7 +3,9 @@ spring:
     name: api-gateway
   cloud:
     gateway:
-      routes:
+      server:
+        webmvc:
+          routes:
         - id: auth-service
           uri: lb://auth-service
           predicates:
