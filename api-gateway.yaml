@@ -55,7 +55,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,circuitbreakers
+        include: health,info,circuitbreakers,env
   endpoint:
     health:
       show-details: always
