@@ -24,7 +24,7 @@ server:
 reniec:
   api:
     url: https://api.decolecta.com/v1/reniec/dni
-    token: ${RENIEC_TOKEN}
+    token: ${RENIEC_API_TOKEN}
 
 resilience4j:
   circuitbreaker:
