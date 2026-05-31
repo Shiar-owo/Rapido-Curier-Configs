@@ -24,7 +24,6 @@ server:
 reniec:
   api:
     url: https://api.decolecta.com/v1/reniec/dni
-    token: ${RENIEC_TOKEN}
 
 resilience4j:
   circuitbreaker:
@@ -36,9 +35,6 @@ resilience4j:
         permitted-number-of-calls-in-half-open-state: 3
         slow-call-duration-threshold: 2s
         slow-call-rate-threshold: 50
-
-jwt:
-  secret: ${JWT_SECRET:default-secret-key-minimum-32-chars}
 
 eureka:
   client:
