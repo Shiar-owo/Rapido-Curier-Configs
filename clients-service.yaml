@@ -35,6 +35,8 @@ resilience4j:
         permitted-number-of-calls-in-half-open-state: 3
         slow-call-duration-threshold: 2s
         slow-call-rate-threshold: 50
+        ignore-exceptions:
+          - com.rapidocurier.clientsservice.domain.exception.ResourceNotFoundException
 
 eureka:
   client:
