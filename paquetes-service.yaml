@@ -33,6 +33,19 @@ resilience4j:
         slow-call-rate-threshold: 50
         ignore-exceptions:
           - com.rapidocurier.paquetesservice.domain.exception.ResourceNotFoundException
+  retry:
+    instances:
+      clients-service:
+        max-attempts: 3
+        wait-duration: 500ms
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
+        retry-exceptions:
+          - io.github.resilience4j.circuitbreaker.CallNotPermittedException
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+        ignore-exceptions:
+          - com.rapidocurier.paquetesservice.domain.exception.ResourceNotFoundException
 
 tarifa:
   costo-por-kg: 8.0
@@ -57,7 +70,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,circuitbreakers,refresh
+        include: health,info,circuitbreakers,circuitbreaker-events,retry-events,refresh
   endpoint:
     health:
       show-details: always
