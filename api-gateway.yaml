@@ -30,6 +30,8 @@ spring:
               uri: lb://paquetes-service
               predicates:
                 - Path=/api/v1/paquetes/**,/api/v1/categorias/**
+              filters:
+                - AddRequestHeader=X-Source, api-gateway
             - id: paquetes-service-openapi
               uri: lb://paquetes-service
               predicates:
