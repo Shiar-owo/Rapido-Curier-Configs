@@ -34,6 +34,18 @@ resilience4j:
         ignore-exceptions:
           - com.rapidocurier.paquetesservice.domain.exception.ResourceNotFoundException
 
+tarifa:
+  costo-por-kg: 8.0
+  porcentaje-valor-declarado: 0.01
+  tarifa-default: 5.0
+  rutas:
+    LIMA-AREQUIPA: 15.0
+    AREQUIPA-LIMA: 15.0
+    LIMA-CUSCO: 20.0
+    CUSCO-LIMA: 20.0
+    AREQUIPA-CUSCO: 12.0
+    CUSCO-AREQUIPA: 12.0
+
 eureka:
   client:
     register-with-eureka: true
@@ -45,7 +57,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,circuitbreakers
+        include: health,info,circuitbreakers,refresh
   endpoint:
     health:
       show-details: always
