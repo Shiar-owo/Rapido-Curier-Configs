@@ -26,6 +26,16 @@ spring:
                 - Path=/clients/v3/api-docs
               filters:
                 - SetPath=/v3/api-docs
+            - id: paquetes-service
+              uri: lb://paquetes-service
+              predicates:
+                - Path=/api/v1/paquetes/**,/api/v1/categorias/**
+            - id: paquetes-service-openapi
+              uri: lb://paquetes-service
+              predicates:
+                - Path=/paquetes/v3/api-docs
+              filters:
+                - SetPath=/v3/api-docs
 
 server:
   port: 8080
@@ -47,6 +57,13 @@ resilience4j:
         permitted-number-of-calls-in-half-open-state: 3
         slow-call-duration-threshold: 2s
         slow-call-rate-threshold: 50
+      paquetes-service:
+        sliding-window-size: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 3
+        slow-call-duration-threshold: 2s
+        slow-call-rate-threshold: 50
 
 management:
   endpoints:
@@ -61,11 +78,13 @@ management:
 
 springdoc:
   swagger-ui:
-    urls:
-      - name: auth-service
-        url: /auth/v3/api-docs
-      - name: clients-service
-        url: /clients/v3/api-docs
+      urls:
+        - name: auth-service
+          url: /auth/v3/api-docs
+        - name: clients-service
+          url: /clients/v3/api-docs
+        - name: paquetes-service
+          url: /paquetes/v3/api-docs
 
 eureka:
   client:
